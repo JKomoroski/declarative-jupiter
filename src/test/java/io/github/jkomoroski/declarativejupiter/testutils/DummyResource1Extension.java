@@ -8,10 +8,12 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.support.TypeBasedParameterResolver;
 
-public class DummyResource1Extension extends TypeBasedParameterResolver<DummyResource1> implements BeforeEachCallback, AfterEachCallback {
+public class DummyResource1Extension extends TypeBasedParameterResolver<DummyResource1> implements BeforeEachCallback,
+        AfterEachCallback {
 
     @Override
-    public DummyResource1 resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+    public DummyResource1 resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
         return extensionContext.getStore(ExtensionContext.Namespace.GLOBAL)
                 .getOrComputeIfAbsent(DummyResource1.class, k -> new DummyResource1(), DummyResource1.class);
     }

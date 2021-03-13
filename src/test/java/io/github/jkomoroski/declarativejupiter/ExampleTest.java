@@ -1,17 +1,16 @@
 package io.github.jkomoroski.declarativejupiter;
 
+import static java.util.function.Predicate.not;
+
 import io.github.jkomoroski.declarativejupiter.testutils.DeclarativeJupiterUtilities;
+import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.stream.IntStream;
-
-import static java.util.function.Predicate.not;
 
 class ExampleTest {
 
@@ -58,8 +57,8 @@ class ExampleTest {
     }
 
     @Test
-    void testFirstMillionFizzBuzzDoesNotThrow() {
-        final String[] args = IntStream.range(0, 1_000_000)
+    void testFirstHundredThousandFizzBuzzDoesNotThrow() {
+        final String[] args = IntStream.range(0, 100_000)
                 .mapToObj(String::valueOf)
                 .toArray(String[]::new);
 

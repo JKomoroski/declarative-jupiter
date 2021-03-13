@@ -1,14 +1,13 @@
 package io.github.jkomoroski.declarativejupiter;
 
+import static java.util.function.Predicate.not;
+
 import io.github.jkomoroski.declarativejupiter.testutils.AbstractBaseTest;
 import io.github.jkomoroski.declarativejupiter.testutils.DeclarativeJupiterUtilities;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.stream.IntStream;
-
-import static java.util.function.Predicate.not;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class SecondExampleTest extends AbstractBaseTest {
 
@@ -23,8 +22,8 @@ class SecondExampleTest extends AbstractBaseTest {
     }
 
     @Test
-    void testFirstMillionFizzBuzzDoesNotThrow() {
-        final String[] args = IntStream.range(0, 1_000_000)
+    void testFirstHundredThousandFizzBuzzDoesNotThrow() {
+        final String[] args = IntStream.range(0, 100_000)
                 .mapToObj(String::valueOf)
                 .toArray(String[]::new);
 

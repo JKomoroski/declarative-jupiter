@@ -1,20 +1,18 @@
 package io.github.jkomoroski.declarativejupiter;
 
+import static java.util.function.Predicate.not;
+
 import io.github.jkomoroski.declarativejupiter.testutils.DeclarativeJupiterUtilities;
 import io.github.jkomoroski.declarativejupiter.testutils.DummyResource1Extension;
 import io.github.jkomoroski.declarativejupiter.testutils.DummyResource2Extension;
 import io.github.jkomoroski.declarativejupiter.testutils.MainApplicationExtension;
+import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junitpioneer.jupiter.ClearSystemProperty;
 import org.junitpioneer.jupiter.SetSystemProperty;
 import org.junitpioneer.jupiter.WritesSystemProperty;
-
-import java.util.List;
-import java.util.stream.IntStream;
-
-import static java.util.function.Predicate.not;
 
 @SetSystemProperty(key = "key", value = "value")
 @ExtendWith({DummyResource1Extension.class, DummyResource2Extension.class, MainApplicationExtension.class})
@@ -44,12 +42,12 @@ class ThirdExampleTest {
     @WritesSystemProperty
     void testThrowOnStartUp(DummyResource1 r1, DummyResource2 r2) {
         System.clearProperty("key");
-        Assertions.assertThrows(Exception.class, () -> new Main(r1, r2), "application fails to start without prop");
+        Assertions.assertThrows(IllegalStateException.class, () -> new Main(r1, r2), "application fails to start without prop");
     }
 
     @Test
-    void testFirstMillionFizzBuzzDoesNotThrow() {
-        final String[] args = IntStream.range(0, 1_000_000)
+    void testFirstHundredThousandFizzBuzzDoesNotThrow() {
+        final String[] args = IntStream.range(0, 100_000)
                 .mapToObj(String::valueOf)
                 .toArray(String[]::new);
 
@@ -79,6 +77,7 @@ class ThirdExampleTest {
 
     @Test
     void testApplicationHasRunningState() {
+        application.run();
         Assertions.assertTrue(application.isRunning(), "Application Should be running");
     }
 

@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main {
 
-    public static void main(String...args) {
+    public static void main(String... args) {
         final DummyResource1 dummyResource1 = new DummyResource1();
         final DummyResource2 dummyResource2 = new DummyResource2();
         final int exitCode = new Main(dummyResource1, dummyResource2, args).run();
@@ -20,7 +22,7 @@ public class Main {
     private final DummyResource2 resource2;
     private boolean isRunning = true;
 
-    public Main(DummyResource1 resource1, DummyResource2 resource2, String...args) {
+    public Main(DummyResource1 resource1, DummyResource2 resource2, String... args) {
         this.resource1 = resource1;
         this.resource2 = resource2;
         this.args = args;
@@ -44,7 +46,7 @@ public class Main {
 
             return 0;
         } catch (NumberFormatException e) {
-            System.out.println("Error: " + e.getMessage() + ". Cannot parse number formatting for this argument.");
+            log.trace("Error: {}. Cannot parse number formatting for this argument.", e.getMessage());
             return 1;
         }
     }
